@@ -4,7 +4,7 @@ build:
 	go build -o kafgres ./cmd/kafgres
 
 publish:
-	KO_DOCKER_REPO=ghcr.io/riftonix ko build ./cmd/kafgres --base-import-paths --tags latest,v0.0.3
+	KO_DOCKER_REPO=ghcr.io/riftonix ko build ./cmd/kafgres --base-import-paths --tags latest,v0.0.4
 
 run: build
 	./kafgres
