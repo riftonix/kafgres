@@ -45,8 +45,8 @@ func Init() {
 	http.HandleFunc("/health", health.Handler(healthState))
 
 	go func() {
-		logrus.Infof("Starting HTTP server on %s", cfg.HTTPAddr())
-		time.Sleep(5 * time.Second)
+		logrus.Infof("Starting HTTP server on %s with %s delay...", cfg.HTTPAddr(), cfg.HTTPStartupDelay)
+		time.Sleep(cfg.HTTPStartupDelay)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logrus.Fatalf("HTTP server error: %v", err)
 		}

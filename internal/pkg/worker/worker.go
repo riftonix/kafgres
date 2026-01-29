@@ -62,9 +62,9 @@ func ProcessCycle(database db.Interface, writer kafka.Writer, state *health.Stat
 func WaitForShutdown(ctx context.Context, cleanup func() error) {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<-quit
+	sig := <-quit
 
-	logrus.Info("Shutting down gracefully...")
+	logrus.WithField("signal", sig.String()).Info("Shutdown signal received, shutting down gracefully...")
 	if err := cleanup(); err != nil {
 		logrus.Fatalf("Shutdown error: %v", err)
 	}

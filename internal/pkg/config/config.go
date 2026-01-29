@@ -19,8 +19,9 @@ const (
 	defaultKafkaBrokers = "localhost:9092"
 	defaultKafkaTopic   = "test-topic"
 
-	defaultHTTPPort  = 8080
-	defaultPollDelay = 5 * time.Second
+	defaultHTTPPort         = 8080
+	defaultPollDelay        = 5 * time.Second
+	defaultHTTPStartupDelay = 5 * time.Second
 )
 
 // PostgresConfig holds PostgreSQL connection settings.
@@ -41,10 +42,11 @@ type KafkaConfig struct {
 
 // Config holds service configuration.
 type Config struct {
-	Postgres     PostgresConfig
-	Kafka        KafkaConfig
-	HTTPPort     int
-	PollInterval time.Duration
+	Postgres         PostgresConfig
+	Kafka            KafkaConfig
+	HTTPPort         int
+	HTTPStartupDelay time.Duration
+	PollInterval     time.Duration
 }
 
 // FromEnv loads configuration from environment variables.
@@ -64,8 +66,9 @@ func FromEnv() Config {
 			Brokers: brokers,
 			Topic:   getEnv("KAFKA_TOPIC", defaultKafkaTopic),
 		},
-		HTTPPort:     getEnvInt("HTTP_PORT", defaultHTTPPort),
-		PollInterval: getEnvDuration("DEFAULT_POLL_INTERVAL", defaultPollDelay),
+		HTTPPort:         getEnvInt("HTTP_PORT", defaultHTTPPort),
+		HTTPStartupDelay: getEnvDuration("HTTP_STARTUP_DELAY", defaultHTTPStartupDelay),
+		PollInterval:     getEnvDuration("POLL_INTERVAL", defaultPollDelay),
 	}
 }
 
