@@ -2,7 +2,7 @@ module kafgres
 
 go 1.24.0
 
-toolchain go1.26.6
+toolchain go1.26.7
 
 require (
 	github.com/lib/pq v1.12.3
