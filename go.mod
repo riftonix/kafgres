@@ -7,7 +7,7 @@ toolchain go1.27.0
 require (
 	github.com/lib/pq v1.12.3
 	github.com/segmentio/kafka-go v0.4.51
-	github.com/sirupsen/logrus v1.10.1
+	github.com/sirupsen/logrus v1.10.2
 )
 
 require (
